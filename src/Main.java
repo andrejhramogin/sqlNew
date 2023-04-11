@@ -9,8 +9,8 @@ public class Main {
 //        ConnectionDB.ReadDB();
 //        ConnectionDB.CloseDB();
 
-        Hospital.conn();
-        Hospital.createDB();
+        Hospital2.conn();
+//        Hospital2.createDB();
 
 
     }

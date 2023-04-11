@@ -23,23 +23,37 @@ public class Hospital {
                 "'DayOfWeek' INT NOT NULL," +
                 "'EndTime' TIME NOT NULL ," +
                 "'Name' NVARCHAR(100) NOT NULL UNIQUE," +
-                "'StartTime' TIME NOT NULL, CHECK (DayOfWeek>=1 AND DayOfWeek <=7), CHECK (StartTime >= 8  AND StartTime <= 18 ), CHECK (EndTime > StartTime));");
+                "'StartTime' TIME NOT NULL, CHECK (DayOfWeek>=1 AND DayOfWeek <=7), CHECK (StartTime >= 8.00  AND StartTime <= 18.00 ), CHECK (EndTime > StartTime));");
 
         statmt.execute("CREATE TABLE if not exists 'Doctors'('Id' INTEGER PRIMARY KEY AUTOINCREMENT not null," +
-                " 'Name' nvarchar MAX NOT NULL CHECK (Name != ' ')," +
+                " 'Name' nvarchar MAX NOT NULL CHECK (trim (Name) != '')," +
                 " 'Phone' CHAR(10)," +
                 "'Salary' money NOT NULL CHECK (Salary>0)," +
-                "'Surname' NVARCHAR MAX NOT NULL CHECK (Surname != ' ') );");
+                "'Surname' NVARCHAR MAX NOT NULL CHECK (trim(Surname) != '') );");
 
         statmt.execute("CREATE TABLE if not exists 'Diseases'(" +
                 "'Id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                "'Name' NVARCHAR(100) NOT NULL UNIQUE CHECK (Name != ' ')," +
+                "'Name' NVARCHAR(100) NOT NULL UNIQUE CHECK (trim(Name) != '')," +
                 "'Severity' INT NOT NULL DEFAULT 1 CHECK (Severity >= 1));");
 
         statmt.execute("CREATE TABLE if not exists 'Departments' (" +
                 "'Id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 "'Building' INT NOT NULL CHECK (Building>=1 AND Building <=5)," +
                 "'Financing' MONEY NOT NULL DEFAULT 0 CHECK (Financing >=0)," +
-                "'Name' NVARCHAR(100) NOT NULL UNIQUE CHECK (Name != ' ') );");
+                "'Name' NVARCHAR(100) NOT NULL UNIQUE CHECK (trim(Name) != '') );");
+
+        statmt.execute("CREATE TABLE if not exists 'Departments' (" +
+                " );");
+    }
+
+    public static void writeDB() throws SQLException{
+        statmt.execute("INSERT INTO 'Doctors' ('Name', 'Phone', 'Salary', 'Surname')" +
+                "VALUES ('Steve', 568987565, 10000, 'Jones') ");
+        statmt.execute("INSERT INTO 'Doctors' ('Name', 'Phone', 'Salary', 'Surname')" +
+                "VALUES ('John', 336240893, 10000, 'White') ");
+        statmt.execute("INSERT INTO 'Doctors' ('Name', 'Phone', 'Salary', 'Surname')" +
+                "VALUES ('Mike', 123456789, 12500, 'Black') ");
+
+        System.out.println("Таблица заполена");
     }
 }
