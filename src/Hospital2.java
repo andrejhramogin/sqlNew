@@ -23,7 +23,18 @@ public class Hospital2 {
 
         statmt.execute("CREATE TABLE if not exists 'Doctors'('Id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 "'Name' nvarchar MAX NOT NULL CHECK (trim (Name) != '')," +
-                "'' );");
+                "'Premium' MONEY NOT NULL DEFAULT 0 CHECK (Premium >= 0)," +
+                "'Salary' MONEY NOT NULL CHECK (Salary > 0)," +
+                "'Surname' NVARCHAR MAX NOT NULL CHECK (trim(Surname) != 0));");
 
+        statmt.execute("CREATE TABLE if not exists 'DoctorsSpecializations' ('Id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                "'DoctorId' INTEGER NOT NULL, " +
+                "'SpecializationId' INTEGER NOT NULL," +
+                "FOREIGN KEY (DoctorId) REFERENCES Doctors(Id), FOREIGN KEY (SpecializationId) REFERENCES Specializations(Id));");
+
+        statmt.execute("CREATE TABLE if not exists 'Specializations'(" +
+                "'Id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                "'Name' NVARCHAR(100) NOT NULL UNIQUE CHECK (trim(Name) != 0));");
     }
 }
+

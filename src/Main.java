@@ -10,7 +10,7 @@ public class Main {
 //        ConnectionDB.CloseDB();
 
         Hospital2.conn();
-//        Hospital2.createDB();
+        Hospital2.createDB();
 
 
     }
