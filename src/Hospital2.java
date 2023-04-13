@@ -35,6 +35,35 @@ public class Hospital2 {
         statmt.execute("CREATE TABLE if not exists 'Specializations'(" +
                 "'Id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 "'Name' NVARCHAR(100) NOT NULL UNIQUE CHECK (trim(Name) != 0));");
+
+        statmt.execute("CREATE TABLE if not exists 'Donations' (" +
+                "'Id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                "'Amount' MONEY NOT NULL CHECK (Amount > 0)," +
+                "'Date' DATE NOT NULL DEFAULT CURRENT_DATE CHECK (Date <= CURRENT_DATE)," +
+                "'DepartmentId' INT NOT NULL," +
+                "'SponsorId' INT NOT NULL," +
+                "FOREIGN KEY (DepartmentId) REFERENCES Departments(Id)," +
+                "FOREIGN KEY (SponsorId) REFERENCES Sponsors(Id));");
+
+        statmt.execute("CREATE TABLE if not exists 'Sponsors' (" +
+                "'Id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                "'Name' nvarchar (100) not null unique check (trim(Name) != 0));");
+
+        statmt.execute("create table if not exists 'Vacations'(" +
+                "'Id' integer primary key autoincrement not null," +
+                "'EndDate' date not null check (EndDate > StartDate)," +
+                "'StartDate' date not null," +
+                "'DoctorId' int not null," +
+                "foreign key (DoctorId) references Doctors(Id));");
+
+        statmt.execute("create table if not exists 'Wards'(" +
+                "'Id' integer primary key autoincrement not null," +
+                "'Name' nvarchar (20) not null unique check(trim(Name) != 0)," +
+                "'DepartmentId' int not null," +
+                "foreign key (DepartmentId) references Departments(Id));"); //палаты
+
+        System.out.println("Table is created.");
+
     }
 }
 
