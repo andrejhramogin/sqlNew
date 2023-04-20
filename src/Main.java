@@ -9,9 +9,13 @@ public class Main {
 //        ConnectionDB.ReadDB();
 //        ConnectionDB.CloseDB();
 
-        Hospital2.conn();
-        Hospital2.createDB();
+//        Hospital2.conn();
+//        Hospital2.createDB();
 
+//        NewTable.conn();
+//        NewTable.createDB();
+
+        System.out.println(12);
 
     }
 }
